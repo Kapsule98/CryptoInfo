@@ -1,0 +1,1 @@
+SET VUE_APP_BASEURL = "https://cryptoinfo-api.herokuapp.com"

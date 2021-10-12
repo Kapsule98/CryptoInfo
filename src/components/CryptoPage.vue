@@ -33,7 +33,9 @@ export default {
   },
   methods:{
     getData(){
+      console.log(BASE_URL)
       const url = BASE_URL + "/cryptolist"
+      console.log(url)
       axios.get(url).then(res => {
         this.crypto = res.data.data
         console.log(this.crypto)
