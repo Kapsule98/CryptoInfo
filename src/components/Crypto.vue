@@ -141,7 +141,7 @@ export default {
     },
     methods:{
         getCoin(){
-            const url = BASE_URL + `crypto/${this.coin.id}`
+            const url = BASE_URL + `/crypto/${this.coin.id}`
             axios.get(url).then(res => {
                 if(res.status === 200 && res.data.status.error_code === 0) {
                     console.log(res.data.data)
