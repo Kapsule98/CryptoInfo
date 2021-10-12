@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <div @click="moreInfo(coin)" class="crypto" v-for="coin,idx in cryptoData" :key=idx>
-      {{coin.name}} - {{ coin.quote.USD.price}}
+      <div>{{coin.name}} ({{coin.symbol}}) </div> 
+      <div style="margin:1rem;">$ {{ coin.quote.USD.price.toFixed(4)}} </div>
     </div>
   </div>  
 </template>
@@ -19,11 +20,12 @@ export default {
   created() {
     this.getData()
   },
-  // mounted: function () {
-  //   window.setInterval(() => {
-  //     this.getData()
-  //   }, 100000)
-  // },
+  // refresh data every x (1000)interval
+  mounted: function () {
+    window.setInterval(() => {
+      this.getData()
+    }, 1000000)
+  },
   computed: {
     cryptoData: function () {
       return this.crypto
@@ -34,6 +36,7 @@ export default {
       const url = BASE_URL + "/cryptolist"
       axios.get(url).then(res => {
         this.crypto = res.data.data
+        console.log(this.crypto)
       }).catch(err => {
         console.log(err)
       })
@@ -47,17 +50,17 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items:center;
+.container{
+    max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 .crypto{
-  height: 14rem;
-  width: 21rem;
-  border:1px solid peachpuff;
-  padding: 3rem;
-  background-color: antiquewhite;
+ background-color: dodgerblue;
+  color: white;
+  padding: 1rem;
+  height: 4rem;
 }
 </style>
